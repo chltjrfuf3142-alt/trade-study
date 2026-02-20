@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="theme-color" content="#05070f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="국제무역사 시험 대비 인터랙티브 학습 앱">
+    <title>국제무역사 학습</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Home Screen -->
+    <div id="home" class="screen active">
+        <div class="home-hero">
+            <div class="hero-icon">📚</div>
+            <h1 class="hero-title">국제무역사 학습앱</h1>
+            <p class="hero-notice">본 자료는 개인 학습용이며 무단 배포를 금합니다.</p>
+        </div>
+        <div class="home-actions">
+            <div class="glass-card action-card" onclick="showScreen('concepts')">
+                <div class="action-icon">📖</div>
+                <div class="action-info">
+                    <div class="action-title">개념정리</div>
+                    <div class="action-desc">7파트 · 58항목</div>
+                </div>
+                <div class="action-arrow">→</div>
+            </div>
+            <div class="glass-card action-card" onclick="showScreen('quiz')">
+                <div class="action-icon">📝</div>
+                <div class="action-info">
+                    <div class="action-title">연습문제</div>
+                    <div class="action-desc">4과목 · 60문제</div>
+                </div>
+                <div class="action-arrow">→</div>
+            </div>
+        </div>
+        <div class="daily-stats">
+            <div class="daily-label">📊 오늘의 학습</div>
+            <div class="daily-row">
+                <div class="daily-item">
+                    <div class="daily-value" id="dailySolved">0</div>
+                    <div class="daily-key">풀이 수</div>
+                </div>
+                <div class="daily-divider"></div>
+                <div class="daily-item">
+                    <div class="daily-value" id="dailyRate">-</div>
+                    <div class="daily-key">정답률</div>
+                </div>
+                <div class="daily-divider"></div>
+                <div class="daily-item error-note-btn" onclick="showScreen('quiz');showErrorNotes()">
+                    <div class="daily-value" id="dailyErrors">0</div>
+                    <div class="daily-key">오답노트 →</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Concepts Screen -->
+    <div id="concepts" class="screen">
+        <div class="concepts-header">
+            <h2 class="page-title">📖 개념정리</h2>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="키워드로 검색..." oninput="filterConcepts()">
+            </div>
+        </div>
+        <div class="part-tabs" id="partTabs"></div>
+        <div id="conceptList"></div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quiz" class="screen">
+        <div id="quizSetup">
+            <h2 class="page-title">📝 연습문제</h2>
+            <p style="color:var(--text2);font-size:0.85rem;margin-bottom:20px">과목을 선택하고 풀어보세요</p>
+            <div class="subj-tabs" id="subjTabs"></div>
+            <div class="toggle-row">
+                <span class="toggle-label">🔀 랜덤 출제</span>
+                <div class="toggle on" id="toggleRandom" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="startQuiz()">시작하기</button>
+        </div>
+        <div id="quizActive" style="display:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <span class="q-number" id="qProgress"></span>
+                <span style="font-size:0.8rem;color:var(--text3)" id="qScore"></span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div id="questionArea"></div>
+            <button class="btn btn-primary btn-block" id="nextBtn" style="display:none" onclick="nextQuestion()">다음 문제
+                →</button>
+        </div>
+        <div id="quizResult" style="display:none"></div>
+        <!-- Error Notes (inside quiz screen) -->
+        <div id="errorNotesSection" style="display:none">
+            <div class="section-title">🔴 오답 노트</div>
+            <div id="errorList"></div>
+            <div id="noErrors" style="text-align:center;padding:40px;color:var(--text3)">
+                <div style="font-size:3rem;margin-bottom:12px">🎉</div>
+                <p>오답이 없습니다!</p>
+            </div>
+            <button class="btn btn-outline btn-block" onclick="resetQuizUI()" style="margin-top:12px">← 돌아가기</button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="glass-nav">
+            <div class="nav-item active" data-screen="home" onclick="showScreen('home')"><span class="icon">🏠</span>홈
+            </div>
+            <div class="nav-item" data-screen="concepts" onclick="showScreen('concepts')"><span
+                    class="icon">📖</span>개념정리</div>
+            <div class="nav-item" data-screen="quiz" onclick="showScreen('quiz')"><span class="icon">📝</span>연습문제</div>
+        </div>
+    </nav>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
