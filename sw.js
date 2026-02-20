@@ -1,10 +1,11 @@
-const CACHE_NAME = 'trade-study-v4';
+const CACHE_NAME = 'trade-study-v5';
 const ASSETS = [
     './',
     './index.html',
     './styles.css',
     './app.js',
     './data.js',
+    './firebase-config.js',
     './manifest.json'
 ];
 
@@ -23,6 +24,10 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+    const url = e.request.url;
+    if (url.includes('googleapis.com') || url.includes('firebaseio.com') || url.includes('gstatic.com') || url.includes('firestore') || url.includes('identitytoolkit')) {
+        return;
+    }
     e.respondWith(
         caches.match(e.request).then(r => r || fetch(e.request))
     );

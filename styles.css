@@ -885,3 +885,88 @@ body::after {
     background: var(--glass-border);
     border-radius: 2px
 }
+
+/* ========== AUTH ========== */
+.auth-area {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px
+}
+
+.btn-login {
+    padding: 10px 24px;
+    border-radius: 24px;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.4s;
+    letter-spacing: 0.3px
+}
+
+.btn-login:hover {
+    border-color: var(--neon);
+    box-shadow: 0 0 16px var(--glow);
+    transform: translateY(-2px)
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px
+}
+
+.user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--neon);
+    box-shadow: 0 0 8px var(--glow)
+}
+
+.user-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.btn-logout {
+    padding: 5px 12px;
+    border-radius: 12px;
+    background: transparent;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    color: var(--red);
+    font-size: 0.68rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s
+}
+
+.btn-logout:hover {
+    background: var(--red-bg);
+    border-color: var(--red)
+}
+
+.sync-status {
+    font-size: 0.68rem;
+    color: var(--neon4);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    animation: screenIn 0.3s
+}

@@ -14,7 +14,7 @@ function checkDailyReset() {
     const today = new Date().toDateString();
     if (dailyData.date !== today) dailyData = { date: today, solved: 0, correct: 0 };
 }
-function saveDaily() { localStorage.setItem('daily', JSON.stringify(dailyData)); }
+function saveDaily() { localStorage.setItem('daily', JSON.stringify(dailyData)); if (typeof saveToCloud === 'function') saveToCloud(); }
 
 // === Navigation ===
 function showScreen(id) {
@@ -160,11 +160,13 @@ function addError(q) {
     if (!errorNotes.find(e => e.id === q.id)) {
         errorNotes.push({ id: q.id, subj: q.subj, q: q.q, o: q.o, a: q.a, ex: q.ex });
         localStorage.setItem('errors', JSON.stringify(errorNotes));
+        if (typeof saveToCloud === 'function') saveToCloud();
     }
 }
 function removeError(id) {
     errorNotes = errorNotes.filter(e => e.id !== id);
     localStorage.setItem('errors', JSON.stringify(errorNotes));
+    if (typeof saveToCloud === 'function') saveToCloud();
 }
 function showErrorNotes() {
     document.getElementById('quizSetup').style.display = 'none';
