@@ -71,6 +71,8 @@ function renderConcepts() {
     </div>`;
     });
     el.innerHTML = html;
+    // Resize annotation canvas after content renders
+    if (typeof onConceptsRendered === 'function') onConceptsRendered();
 }
 function filterConcepts() { renderConcepts(); }
 

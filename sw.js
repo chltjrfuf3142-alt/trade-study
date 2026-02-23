@@ -1,4 +1,4 @@
-const CACHE_NAME = 'trade-study-v5';
+const CACHE_NAME = 'trade-study-v7';
 const ASSETS = [
     './',
     './index.html',
@@ -6,6 +6,7 @@ const ASSETS = [
     './app.js',
     './data.js',
     './firebase-config.js',
+    './handwriting.js',
     './manifest.json'
 ];
 

@@ -77,7 +77,51 @@
             </div>
         </div>
         <div class="part-tabs" id="partTabs"></div>
-        <div id="conceptList"></div>
+        <!-- Concept list with annotation overlay -->
+        <div id="conceptListWrapper" class="concept-list-wrapper">
+            <div id="conceptList"></div>
+            <canvas id="annotationCanvas" class="annotation-canvas"></canvas>
+        </div>
+        <!-- Floating draw toggle -->
+        <button class="draw-toggle-btn" id="drawToggleBtn" onclick="toggleDrawingMode()">✏️</button>
+        <!-- Drawing toolbar (hidden by default) -->
+        <div class="drawing-toolbar" id="drawToolbar" style="display:none">
+            <div class="toolbar-section">
+                <button class="tool-btn active" data-tool="pen" onclick="setTool('pen')" title="펜">🖊️</button>
+                <button class="tool-btn" data-tool="eraser" onclick="setTool('eraser')" title="지우개">🧹</button>
+            </div>
+            <div class="toolbar-divider"></div>
+            <div class="toolbar-section colors">
+                <div class="color-dot active" data-color="#00d4ff" style="background:#00d4ff"
+                    onclick="setColor('#00d4ff')"></div>
+                <div class="color-dot" data-color="#f87171" style="background:#f87171" onclick="setColor('#f87171')">
+                </div>
+                <div class="color-dot" data-color="#34d399" style="background:#34d399" onclick="setColor('#34d399')">
+                </div>
+                <div class="color-dot" data-color="#fbbf24" style="background:#fbbf24" onclick="setColor('#fbbf24')">
+                </div>
+                <div class="color-dot" data-color="#f472b6" style="background:#f472b6" onclick="setColor('#f472b6')">
+                </div>
+                <div class="color-dot" data-color="#7c3aed" style="background:#7c3aed" onclick="setColor('#7c3aed')">
+                </div>
+                <div class="color-dot" data-color="#ffffff" style="background:#ffffff" onclick="setColor('#ffffff')">
+                </div>
+            </div>
+            <div class="toolbar-divider"></div>
+            <div class="toolbar-section">
+                <button class="width-btn active" data-width="2" onclick="setLineWidth(2)"><span
+                        style="width:4px;height:4px"></span></button>
+                <button class="width-btn" data-width="5" onclick="setLineWidth(5)"><span
+                        style="width:8px;height:8px"></span></button>
+                <button class="width-btn" data-width="10" onclick="setLineWidth(10)"><span
+                        style="width:14px;height:14px"></span></button>
+            </div>
+            <div class="toolbar-divider"></div>
+            <div class="toolbar-section">
+                <button class="tool-btn" onclick="undoStroke()" title="되돌리기">↩️</button>
+                <button class="tool-btn" onclick="clearAnnotations()" title="전체 지우기">🗑️</button>
+            </div>
+        </div>
     </div>
 
     <!-- Quiz Screen -->
@@ -131,6 +175,7 @@
     <script src="data.js"></script>
     <script src="firebase-config.js"></script>
     <script src="app.js"></script>
+    <script src="handwriting.js"></script>
 </body>
 
 </html>

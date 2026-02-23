@@ -49,11 +49,16 @@ auth.onAuthStateChanged(user => {
 async function saveToCloud() {
     if (!currentUser) return;
     try {
-        await db.collection('users').doc(currentUser.uid).set({
+        const saveData = {
             errors: errorNotes,
             daily: dailyData,
             lastSync: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
+        };
+        // Include annotations if available
+        if (typeof annotations !== 'undefined') {
+            saveData.annotations = annotations;
+        }
+        await db.collection('users').doc(currentUser.uid).set(saveData, { merge: true });
         showSyncStatus('☁️ 저장됨');
     } catch (e) {
         console.error('Save error:', e);
@@ -75,6 +80,11 @@ async function loadFromCloud() {
             if (data.daily) {
                 dailyData = data.daily;
                 localStorage.setItem('daily', JSON.stringify(dailyData));
+            }
+            if (data.annotations && typeof annotations !== 'undefined') {
+                annotations = data.annotations;
+                localStorage.setItem('annotations', JSON.stringify(annotations));
+                if (typeof renderAllStrokes === 'function') renderAllStrokes();
             }
             checkDailyReset();
             updateHome();
